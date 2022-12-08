@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/binary"
 	"fmt"
+	"github.com/ledgerwatch/erigon/consensus"
 	"math/big"
 	"runtime"
 	"time"
@@ -1094,8 +1095,12 @@ func logProgressHeaders(logPrefix string, prev, now uint64) uint64 {
 
 type chainReader struct {
 	config      *params.ChainConfig
-	tx          kv.RwTx
+	tx          kv.Tx
 	blockReader services.FullBlockReader
+}
+
+func NewChainReader(cfg *params.ChainConfig, tx kv.Tx, blockReader services.FullBlockReader) consensus.ChainHeaderReader {
+	return chainReader{config: cfg, tx: tx, blockReader: blockReader}
 }
 
 func (cr chainReader) Config() *params.ChainConfig  { return cr.config }

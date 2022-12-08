@@ -626,6 +626,7 @@ func (ww *WriterWrapper) CreateContract(address common.Address) error {
 
 func initConsensusEngine(chainConfig *params.ChainConfig, logger log.Logger, snapshots *snapshotsync.RoSnapshots) (engine consensus.Engine) {
 	config := ethconfig.Defaults
+	config.HeimdallURL = "http://127.0.0.1:1317"
 
 	switch {
 	case chainConfig.Clique != nil:

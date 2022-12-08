@@ -1,10 +1,8 @@
 package ethconsensusconfig
 
 import (
-	"github.com/ledgerwatch/erigon-lib/kv"
-	"path/filepath"
-
 	"github.com/davecgh/go-spew/spew"
+	"github.com/ledgerwatch/erigon-lib/kv"
 	"github.com/ledgerwatch/erigon/consensus"
 	"github.com/ledgerwatch/erigon/consensus/aura"
 	"github.com/ledgerwatch/erigon/consensus/aura/consensusconfig"
@@ -62,8 +60,8 @@ func CreateConsensusEngine(chainConfig *params.ChainConfig, logger log.Logger, c
 		}
 	case *params.BorConfig:
 		if chainConfig.Bor != nil {
-			borDbPath := filepath.Join(datadir, "bor") // bor consensus path: datadir/bor
-			eng = bor.New(chainConfig, db.OpenDatabase(borDbPath, logger, false, readonly), HeimdallURL, WithoutHeimdall)
+			//borDbPath := filepath.Join(datadir, "bor") // bor consensus path: datadir/bor
+			eng = bor.New(chainConfig, nil, HeimdallURL, WithoutHeimdall)
 		}
 	}
 
